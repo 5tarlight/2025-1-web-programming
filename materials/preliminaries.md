@@ -1,4 +1,4 @@
-<img width="1232" alt="image" src="https://github.com/user-attachments/assets/b9b15637-b320-4bc4-bfe5-d14a677665db" /># Preliminaries
+# Preliminaries
 
 팀플을 위한 기본적인 정리 노트.
 
