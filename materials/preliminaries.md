@@ -12,6 +12,8 @@ HTML/CSS/JS로 구현한다.
 [Trello](https://trello.com/) 웹에서 To-Do 리스트를 관리할 수 있는 툴이다.
 하지만, Github을 사용할 예정이고 최대한 적은 외부 툴을 사용하기 위해 패스.
 
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 ## Git 사용 가이드
 
 Git은 여러 사람이 협업하여 코드를 작성할 수 있도록 도와주는 툴이다(버전 관리 시스템, VCS).
@@ -34,6 +36,8 @@ git pull origin <branch>
 만약 pull 과정 중에 local changes와 remote changes간에 충돌이 발생했다면, 로컬에서 merge를
 수행해야 한다.
 
+<br /><br /><br />
+
 ### branch
 
 여러 사람이 같은 코드를 동시에 수정하면 충돌(conflict)가 발생할 수 있으므로 브랜치(branch)를
@@ -52,4 +56,30 @@ git pull origin <branch>
 - docs : 문서 수정
 - chore : 빌드, 패키지 메니저 수정 등 기타 잡다한 일
 
-작업한 브랜치를 main으로 합치려면 merge를 수행해야 하는데, 
+<br /><br /><br />
+
+### Pull Requests
+
+작업한 브랜치를 main으로 합치려면 merge를 수행해야 하는데, 마음대로 main에 합치면 안되고 Pull
+Request(PR)을 열어야 한다.
+
+<img width="1267" alt="image" src="https://github.com/user-attachments/assets/005bf66a-6112-4831-8738-c7d489ba8571" />
+
+위 스크린샷을 보면 `custom-nickname` 브랜치에서 `dev` 브랜치로 가는 PR임을 알 수 있다. 간결히
+제목을 적고 내용에 자세한 설명을 적는다. 바뀐 내용, 주의할 점, 리뷰어에게 설명할 내용 등을
+적는다. 스크린샷(붙여넣기로 첨부 가능)을 첨부하는 것도 굉장히 좋다. 특히 웹페이지 디자인은 스크린샷으로
+보여주는게 설명하기보다 더 좋다. 적절히 설명을 적고 PR을 올린다.
+
+등록된 PR은 code review를 받아야 한다. Approve 리뷰 없이는 merge될 수 없다.
+
+<img width="934" alt="image" src="https://github.com/user-attachments/assets/c9c9c986-e9fa-4038-915c-75e6e384683a" />
+
+만약 궁금한 내용이나 의견 교환이 필요하면 코드에 댓글을 달아 대화할 수 있다.
+
+<img width="988" alt="image" src="https://github.com/user-attachments/assets/b95b3ff2-3c57-4acb-ba6a-1023b1434fa7" />
+
+리뷰어는 코드에 수정해야 할 부분, 이해하기 어렵거나 질이 낮은 코드 등이 있으면 Request Changes
+리뷰를 남겨 PR을 반려할 수 있다. 문제가 되는 부분을 댓글로 설명하고 PR 작성자는 문제를 고치고
+다시 리뷰를 요청해야 한다.
+
+<img width="980" alt="image" src="https://github.com/user-attachments/assets/812f0ef7-1bb4-4c77-914d-6fe0269c18f1" />
