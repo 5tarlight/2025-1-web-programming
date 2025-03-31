@@ -135,7 +135,7 @@ type은 위의 브랜치 네이밍에서 살펴본 타입과 동일하다. body�
 <img width="1232" alt="image" src="https://github.com/user-attachments/assets/3a1cf01b-307d-4ecb-b9a2-21d0d6aa5d3f" />
 
 위 스크린샷을 보면 오른쪽에 16진수 코드(hash)를 볼 수 있는데 커밋의 id를 의미한다.
-특수한 경우에 특정 커밋만을 선택해야 할 떄가 있는데 id를 사용해서 선택하게 된다.
+특수한 경우에 특정 커밋만을 선택해야 할 때가 있는데 id를 사용해서 선택하게 된다.
 위 커밋의 id는 `b039aaa`이다. 참고로 저 7글자 id는 단축형으로 실제 id는
 `b039aaa93dad7e597c76f1923a936707d452dc42`이다.
 
