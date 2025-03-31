@@ -1,4 +1,4 @@
-# Preliminaries
+<img width="1232" alt="image" src="https://github.com/user-attachments/assets/b9b15637-b320-4bc4-bfe5-d14a677665db" /># Preliminaries
 
 팀플을 위한 기본적인 정리 노트.
 
@@ -56,6 +56,22 @@ git pull origin <branch>
 - docs : 문서 수정
 - chore : 빌드, 패키지 메니저 수정 등 기타 잡다한 일
 
+브랜치는 local에 만들고 나중에 remote로 올리게 된다. 브랜치를 만드는 명령어는
+
+```bash
+git branch <name>      # 새로운 브랜치 생성, 하지만 checkout 하지 않음
+git checkout <name>    # 직접 checkout해야 함
+
+# or
+
+git checkout -b <name> #  브랜치를 만들고 바로 checkout
+```
+
+당연히 동시에 여러 브랜치가 존재할 수 있다. 작업을 하면서 여러 브랜치를 동시에 사용할 경우
+브랜치를 왔다갔다 해야 하는데 이것을 checkout이라고 한다. 서로 내용이 다른 브랜치를
+체크아웃할 경우 자동으로 로컬 파일이 바뀐다. 없던 파일이면 생기고 파일 내용까지
+바뀐다. Github Desktop같은 GUI 툴을 쓴다면 브랜치 메뉴에서 바꿀 수 있다.
+
 <br /><br /><br />
 
 ### Pull Requests
@@ -83,3 +99,92 @@ Request(PR)을 열어야 한다.
 다시 리뷰를 요청해야 한다.
 
 <img width="980" alt="image" src="https://github.com/user-attachments/assets/812f0ef7-1bb4-4c77-914d-6fe0269c18f1" />
+
+
+<br /><br /><br />
+
+### commits
+
+커밋은 코드 변경 내역을 담고 있는 기본 단위이다. 작업의 순서는 다음과 같다.
+
+1. local에서 코드를 수정한다.
+2. commit을 작성한다.
+3. push한다.
+
+변경(create, modify, delete, rename)된 파일을 선택해 커밋을 할 수 있다.
+커밋을 할 때 변경된 내용을 담는 커밋 메세지를 적어야 한다. 메세지를 적을 때
+첫 줄(제목)에 간략하게 동사로 시작하는(영어 기준) 메세지를 적고 다음 줄에 자세한
+부가 설명을 적는다. 커밋 메세지는 다음과 같은 구조를 가진다.
+
+```
+type: subject
+
+body
+
+footer
+```
+
+type은 위의 브랜치 네이밍에서 살펴본 타입과 동일하다. body에는 자세한 설명을 적는다.
+다만 가로 길이가 80자가 넘어가지 않도록 적절히 줄바꿈을 해야 한다. footer는 optional로써
+필요한 경우 적는다. 이슈 트래커 ID를 적는다. 우리는 Github Issues를 사용할 예정이니
+`Fixes #42 Related to #12` 처럼 적으면 된다. 커밋 메시지를 어떻게 쓸 지는 회사, 팀마다
+다르다. 이를 commit convention이라고 하고 통일된 규칙을 따르는 것이 좋다. 아래는 커밋
+메시지의 예시이다(참고로 UnrealEngine 소스코드가 담긴 레포이다). 적당히 알아보게만
+쓰자.
+
+<img width="1232" alt="image" src="https://github.com/user-attachments/assets/3a1cf01b-307d-4ecb-b9a2-21d0d6aa5d3f" />
+
+위 스크린샷을 보면 오른쪽에 16진수 코드(hash)를 볼 수 있는데 커밋의 id를 의미한다.
+특수한 경우에 특정 커밋만을 선택해야 할 떄가 있는데 id를 사용해서 선택하게 된다.
+위 커밋의 id는 `b039aaa`이다. 참고로 저 7글자 id는 단축형으로 실제 id는
+`b039aaa93dad7e597c76f1923a936707d452dc42`이다.
+
+<br />
+
+그럼 이제 직접 커밋을 써보자. 우선 로컬 레포에 변화를 만든다. 파일을 수정하거나,
+파일을 만들거나 삭제하거나 이름을 바꿀 수 있다. VSCode와 같은 현대 IDE에서는
+아래 사진과 같이 git과 연동되어 어떻게 바뀌었는지 보여주기도 한다(M은 Modified를 의미).
+
+<img width="317" alt="image" src="https://github.com/user-attachments/assets/56cd4436-dc3d-4e91-a206-542fc71bdf64" />
+
+커밋을 하기 전에는 어떤 파일들을 커밋에 포함할지 등록해야 한다. 참고로 파일의 부분만을
+등록하는 것은 불가능하다. 한 파일에 여러 부분이 변경되었으면 한 커밋에 담기게
+된다는 의미이다. 등록하는 과정을 add라고 한다. 명령어로는 다음과 같다.
+
+```bash
+git add .
+```
+
+`.`을 사용해서 모든 파일을 선택해 주었고, 특정 파일만 고르고 싶다면 `.`대신
+파일의 이름을 적어 선택할 수 있다. Github Desktop같은 GUI 툴을 사용한다면
+직접 파일을 선택하면 된다. 아래는 [lazygit](https://github.com/jesseduffield/lazygit)이라는 CUI툴이다.
+
+<img width="1082" alt="image" src="https://github.com/user-attachments/assets/29ccd533-ff6e-42ee-9647-3e67ecaf2645" />
+
+이제 파일들을 골랐으니 커밋을 하자. 명령어로는 다음과 같다.
+
+```bash
+git commit -m "Short Commit Message" # 상세한 커밋 메세지를 적지 않을 때
+git commit                           # vim이 열리고 상세한 커밋 메세지를 적을 수 있다.
+```
+
+Desktop같은 CUI 툴을 쓴다면 그저 메세지를 적고 커밋 버튼을 눌러주면 된다.
+
+지금 작성한 커밋은 local 환경에 있다. 커밋을 이제 remote에 올려야 한다.
+이것을 push라고 부른다. remote 레포의 위치를 origin이라고 한다.
+(이건 한 git 프로젝트에 여러 remote 레포가 있을 수 있어서인데 잘 사용하지 않는다.
+일반적으로 remote = origin 이라고 생각해도 된다)
+
+```bash
+git push origin <branch>
+```
+
+remote에 브랜치가 없다면 해당 이름으로 생기고 자신의 local 브랜치와 서로
+이어지게 된다. 이제 충분히 커밋을 진행하고 작업이 완료되었다면 PR을 올리러 가면 된다.
+
+너무 많은 변경사항을 한 커밋에 몰아넣는 것은 좋지 않다. 커밋은 한 단위의 작업만
+담는 것이 좋다. 특정 커밋만 merge하는 경우도 있고 특정 커밋만 돌리는(revert) 경우도 있다(cherry-pick
+이라고 한다). 이럴 때 한 커밋에 너무 많은 내용이 있다면 커밋을 찢는 PR을 해야 한다.
+제목도 적기 어려워지니 적절히 쪼개도록 하자. 아래는 커밋의 예시이다.
+
+<img width="879" alt="image" src="https://github.com/user-attachments/assets/915026b2-f104-41d0-b917-e9d21d760606" />
