@@ -45,7 +45,7 @@ git pull origin <branch>
 레포 관리 정책에 따라 다르지만 main에서 파생되는 브랜치를 만들어서 작업하고 main에 합치는(merge)
 방식이다. 큰 프로젝트에서는 dev 브랜치를 두고 main에 합쳐지기 전 미리 합쳐서 QA등을
 진행하기도 한다. 브랜치의 이름은 `type/feature` 형식으로 짓는다. 예를 들어, 로그인 UI를 만드는
-브랜치라면 `feature/login-ui` 형식이다. 사용하는 type은 아래와 같다.
+브랜치라면 `feat/login-ui` 형식이다. 사용하는 type은 아래와 같다.
 
 - feat : 신기능
 - fix : 버그 수정
