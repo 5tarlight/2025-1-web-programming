@@ -12,6 +12,7 @@
 ## Team Notes
 
 - [Preliminaries](materials/preliminaries.md) : 팀플을 위한 기본적인 정리 노트.
+- [Co-working](materials/co-working.md) : 팀원 간의 협업을 위한 정리 노트.
 
 ## Tools
 
