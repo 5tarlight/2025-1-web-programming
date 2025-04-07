@@ -64,4 +64,35 @@ float calculateAverage(const std::vector<int>& numbers) {
 높은 작업부터 먼저 처리해야 한다. 이것을 위해 여러 Issue Tracking Tool이 있다.
 예를 들어, Github Issues, Jira, Trello 등이 있다. 우리는 프로젝트의 규모,
 학습 난이도를 고려해 Github Issues를 사용한다. 레포 페이지에서 Issue탭으로
-이동해 새로운 issue를 열 수 있다. 
+이동해 새로운 issue를 열 수 있다. 간략한 제목과 상세한 설명을 적는다.
+
+<img width="956" alt="image" src="https://github.com/user-attachments/assets/1de8a2e5-558f-42a4-b0e8-29a70a0e4c6d" />
+
+label을 붙여 어떤 issue인지 알 수 있도록 정리한다.
+
+<img width="442" alt="image" src="https://github.com/user-attachments/assets/ad6e4e1d-9222-4e90-b5f5-b8472e8cdd58" />
+
+필요한 경우에는 issue에서 서로 토론, 회의를 통해 건전한 피드백을 할 수 있다.
+
+<img width="941" alt="image" src="https://github.com/user-attachments/assets/65250e36-fec8-4adc-9fc8-0ace438339fa" />
+
+
+이제 각 개발자는 처리해야 할 issue 목록을 살펴보며 어떤 이슈를 처리할지 정한다.
+담당자를 Assign 함으로써 여러 사람이 동시에 한 이슈에 매달리는 사고를 방지할 수 있다.
+만약 issue가 너무 커서 혼자 해결하기 어려운 경우에는 sub-issue로 분리해
+분업할 수 있다.
+
+<img width="383" alt="image" src="https://github.com/user-attachments/assets/b2d64592-c3af-4ed6-81f0-999b25e5cef4" />
+
+이제 관련한 브랜치를 만들고 작업을 처리한다. 처리가 완료되면 PR을 올려 반영할 준비를 한다.
+이때, PR에 `fixes #id` 처럼 이슈를 언급하거나 `development`에 추가해 PR과 이슈를
+서로 연결할 수 있다.
+
+<img width="327" alt="image" src="https://github.com/user-attachments/assets/03771b6f-01bc-4abb-a83d-9897e71e2585" />
+
+PR이 머지되고 작업이 종료되면 issue도 `completed` 상태로 닫힌다. 또는,
+아예 작업이 무산되었다면 `closed` 상태로 닫힐 수 있다. label과 제목을
+깔끔하게 유지하면 한눈에 할 일을 볼 수 있다.
+
+<img width="1217" alt="image" src="https://github.com/user-attachments/assets/4766c561-3fec-4cbd-b174-f79b591c83ab" />
+
