@@ -1,0 +1,27 @@
+{
+  "name": "web-programming",
+  "version": "1.0.0",
+  "description": "2025-1 Web Programming Final Task",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5tarlight/2025-1-web-programming.git"
+  },
+  "author": "YEAHx4 <developerstarlight@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/5tarlight/2025-1-web-programming/issues"
+  },
+  "homepage": "https://github.com/5tarlight/2025-1-web-programming#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
