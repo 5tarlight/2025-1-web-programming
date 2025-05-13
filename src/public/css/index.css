@@ -10,5 +10,53 @@
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+}
+
+.header-menu {
+  background: url("/img/header/header-menu-tilemap.png") no-repeat;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.header-menu:hover {
+  opacity: 1;
+}
+
+.header-hover {
+  padding: 0.5rem;
+  border-radius: 0.1rem;
+}
+
+.header-hover:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-notif {
+  background-position: 0 -20px;
+}
+
+.header-msg {
+  background-position: 0 -40px;
+}
+
+.header-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-profile img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.header-profile span {
+  font-size: 0.8rem;
+  color: white;
 }
