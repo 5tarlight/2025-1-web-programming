@@ -1,0 +1,51 @@
+:root {
+  --primary-color: #8B008B;
+}
+
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.side-bar>ul ul {
+  display: none;
+}
+
+:root {
+  --side-bar-width: 270px;
+  --side-bar-height: 90vh;
+}
+
+.side-bar>ul>li {
+  position: relative;
+}
+
+.side-bar>ul>li:hover>ul {
+  display: block;
+  position: absolute;
+  background-color: #888;
+  top: 0;
+  /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+  left: 100%;
+  /* 2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+  width: 100%;
+  /* 1차 메뉴의 너비를 상속 */
+}
+
+.menuChild {
+  border-radius: 20px;
+
+  transition: .2s;
+}
+
+.side-bar ul>li:hover>a {
+  background-color: #555;
+  border-bottom: 1px solid #999;
+}
+
+.menuChild:hover {
+  transform: translate(10px, 0);
+}
