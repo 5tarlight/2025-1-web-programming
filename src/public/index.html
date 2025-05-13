@@ -6,22 +6,29 @@
     <title>E-Class</title>
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/index.css" />
-    <script src="./js/index.js" type="module"></script>
+    <script src="js/global.js" defer></script>
+    <script src="js/index.js" defer></script>
   </head>
   <body>
     <header class="header">
       <div class="header-logo">
         <a href="/">
-          <img src="/img/header/hsu_logo.png" alt="HSU" />
+          <img src="img/header/hsu_logo.png" alt="HSU" />
         </a>
       </div>
       <div class="header-nav">
+        <div class="header-profile" id="profile-popup">
+          <img src="img/anonymous.png" alt="Profile" />
+          <span>Name</span>
+
+          <div id="profile-popup-content" style="display: none">
+            <a href="#">내 정보</a>
+            <a href="#">설정</a>
+            <a href="#">로그아웃</a>
+          </div>
+        </div>
         <nav class="header-menu header-notif"></nav>
         <nav class="header-menu header-msg"></nav>
-        <div class="header-profile">
-          <img src="/img/anonymous.png" alt="Profile" />
-          <span>Name</span>
-        </div>
       </div>
     </header>
     Main
