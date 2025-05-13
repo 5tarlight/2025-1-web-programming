@@ -17,6 +17,11 @@ body {
   min-height: 100vh;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 :root {
   --color-primary: #0b4da1;
   --color-bg-dim: #f6f9fa;
