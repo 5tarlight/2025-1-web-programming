@@ -13,6 +13,10 @@
   font-family: "Pretendard", sans-serif;
 }
 
+body {
+  min-height: 100vh;
+}
+
 :root {
   --color-primary: #0b4da1;
   --color-bg-dim: #f6f9fa;
