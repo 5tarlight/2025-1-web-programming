@@ -70,4 +70,19 @@
   display: flex;
   flex-direction: column;
   width: 200px;
+  align-items: center;
+  color: black !important;
+}
+
+#profile-popup-content img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 0.1rem;
+}
+
+.header-popup-menu {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
 }
