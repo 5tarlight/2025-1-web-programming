@@ -84,8 +84,27 @@
   margin-bottom: 0.5rem;
 }
 
+#profile-popup-content hr {
+  margin: 1rem 0;
+}
+
 .header-popup-menu {
   display: flex;
   gap: 0.5rem;
   font-size: 0.8rem;
+}
+
+.profile-depart {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+}
+
+.profile-number {
+  font-size: 0.8rem;
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
