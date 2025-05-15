@@ -30,7 +30,7 @@ const PopupMenu = (function () {
       let top = rect.bottom + offset + scrollTop;
       let left = rect.left + scrollLeft;
 
-      // Temporarily make it visible to measure its size
+      // 잠깐 보이게 만들어서 크기 계산
       popupEl.style.visibility = "hidden";
       popupEl.style.display = "flex";
       const popupWidth = popupEl.offsetWidth;
@@ -75,9 +75,11 @@ const PopupMenu = (function () {
     });
 
     // 외부 클릭 시 닫기
-    document.addEventListener("click", () => {
-      popupEl.style.display = "none";
-      activeMenus.delete(popupEl);
+    document.addEventListener("click", (e) => {
+      if (!popupEl.contains(e.target)) {
+        popupEl.style.display = "none";
+        activeMenus.delete(popupEl);
+      }
     });
   }
 
