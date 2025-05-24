@@ -17,7 +17,7 @@ const Accordion = (function () {
     if (!triggerEl || !contentEl) return;
 
     contentEl.style.overflow = "hidden";
-    contentEl.style.transition = "max-height 0.3s ease";
+    contentEl.style.transition = "max-height 0.2s ease";
     contentEl.style.maxHeight = "0px";
 
     triggerEl.style.cursor = "pointer";
@@ -25,21 +25,14 @@ const Accordion = (function () {
     triggerEl.addEventListener("click", () => {
       const isOpen = activeItems.has(contentEl);
 
-      // 모든 아코디언 닫기
-      closeAll();
-
       if (!isOpen) {
         contentEl.style.maxHeight = contentEl.scrollHeight + "px";
         activeItems.add(contentEl);
+      } else {
+        contentEl.style.maxHeight = "0px";
+        activeItems.delete(contentEl);
       }
     });
-  }
-
-  function closeAll() {
-    activeItems.forEach((item) => {
-      item.style.maxHeight = "0px";
-    });
-    activeItems.clear();
   }
 
   return { attach };
