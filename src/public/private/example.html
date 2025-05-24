@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta description="라이브러리를 설명하기 위한 페이지" />
+    <link rel="stylesheet" href="/css/global.css" />
     <script src="/js/global.js" defer></script>
     <script src="/js/popup.js" defer></script>
+    <script src="/js/accordion.js" defer></script>
     <script src="/js/private/example.js" defer></script>
     <title>Example</title>
   </head>
@@ -26,6 +28,19 @@
       >
         <h3>Popup Content</h3>
         <p>This is a popup example.</p>
+      </div>
+    </div>
+
+    <h2>Accordian Example</h2>
+    <div>
+      <div class="accordion-item">
+        <div class="accordion-trigger">Section 1</div>
+        <div class="accordion-content">내용1</div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-trigger">Section 2</div>
+        <div class="accordion-content">내용2</div>
       </div>
     </div>
   </body>
