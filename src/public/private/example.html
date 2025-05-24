@@ -4,7 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta description="라이브러리를 설명하기 위한 페이지" />
+    <script src="/js/global.js" defer></script>
+    <script src="/js/popup.js" defer></script>
+    <script src="/js/private/example.js" defer></script>
     <title>Example</title>
   </head>
-  <body></body>
+  <body>
+    <h2>Popup Example</h2>
+    <div>
+      <button id="popup-button">Popup</button>
+      <div
+        id="popup"
+        style="
+          display: none;
+          flex-direction: column;
+          padding: 10px;
+          background-color: white;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          border-radius: 5px;
+        "
+      >
+        <h3>Popup Content</h3>
+        <p>This is a popup example.</p>
+      </div>
+    </div>
+  </body>
 </html>
