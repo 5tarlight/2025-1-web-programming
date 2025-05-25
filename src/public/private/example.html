@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Library example" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <script src="/js/global.js" defer></script>
+    <script src="/js/popup.js" defer></script>
+    <script src="/js/accordion.js" defer></script>
+    <script src="/js/private/example.js" defer></script>
+    <title>Example</title>
+  </head>
+  <body>
+    <h2>Popup Example</h2>
+    <div>
+      <button id="popup-button">Popup</button>
+      <div
+        id="popup"
+        style="
+          display: none;
+          flex-direction: column;
+          padding: 10px;
+          background-color: white;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          border-radius: 5px;
+        "
+      >
+        <h3>Popup Content</h3>
+        <p>This is a popup example.</p>
+      </div>
+    </div>
+
+    <h2>Accordion Example</h2>
+    <div>
+      <div class="accordion-item">
+        <div class="accordion-trigger">Section 1</div>
+        <div class="accordion-content">내용1</div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-trigger">Section 2</div>
+        <div class="accordion-content">내용2</div>
+      </div>
+    </div>
+  </body>
+</html>
