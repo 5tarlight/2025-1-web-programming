@@ -124,3 +124,21 @@
   height: 100%;
   overflow-y: auto;
 }
+
+.my-classes {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-classes a {
+  padding-left: 1rem;
+}
+
+.my-class-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
