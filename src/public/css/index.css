@@ -43,7 +43,6 @@
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
 .body-left footer {
@@ -101,6 +100,19 @@
 .chat {
   display: flex;
   align-items: center;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.chat-active {
+  background-color: var(--color-slate-200);
+}
+
+.chat:hover {
+  cursor: pointer;
+  background-color: var(--color-slate-100);
 }
 
 .chat .chat-avatar {
