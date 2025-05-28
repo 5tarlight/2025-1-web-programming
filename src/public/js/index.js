@@ -245,6 +245,16 @@ afterLoad(() => {
   updateHeader(chat);
   renderChatList();
   renderChatContent(chat);
+
+  document.querySelector(".send-button").addEventListener("click", sendMessage);
+  document.querySelector(".chat-input").addEventListener("keydown", (e) => {
+    if (e.isComposing || e.key === "Process") return;
+
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
 });
 
 function renderChatContent(chat) {
@@ -290,4 +300,24 @@ function renderChatContent(chat) {
       prevSender = msg.sender;
     }
   });
+}
+
+function sendMessage() {
+  const input = document.querySelector(".chat-input");
+  const content = input.value.trim();
+  if (!content) return;
+
+  const chat = chats.find((chat) => chat.id === currentChatId);
+  if (!chat) return;
+
+  chat.messages.push({
+    sender: "me",
+    content,
+    timestamp: new Date().toISOString(),
+  });
+
+  input.value = "";
+  renderChatContent(chat);
+  lastSeenMsg[currentChatId] = chat.messages.length;
+  renderChatList();
 }
