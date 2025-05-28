@@ -422,9 +422,9 @@ function sendMessage() {
 
         if (chat.id === currentChatId) {
           lastSeenMsg[currentChatId] = chat.messages.length;
+          renderChatContent(chat);
         }
 
-        renderChatContent(chat);
         renderChatList();
       }, delay);
     });
