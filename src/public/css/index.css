@@ -192,6 +192,48 @@
   border: 2px solid var(--color-blue-600);
 }
 
+.chat-options-button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--color-neutral-500);
+  margin-left: 0.5rem;
+}
+
+.chat-options-popup {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  right: 1rem;
+  top: 2.5rem;
+  z-index: 100;
+  padding: 0.5rem;
+  min-width: 120px;
+}
+
+.chat-options-popup ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-options-popup li {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-options-popup li:hover {
+  background-color: var(--color-slate-100);
+}
+
+.hidden {
+  display: none;
+}
+
 
 .body-header {
   width: 100%;

@@ -147,33 +147,42 @@ function renderChatRoomPreview(chat) {
   const timestamp = lastMessage ? lastMessage.timestamp : null;
 
   chatElement.innerHTML = `
-    ${avatar}
-    <div class="chat-detail">
-      <div class="chat-header">
-        <div class="chat-title-container">
-          <span class="chat-title">${chat.name}</span>
-          ${
-            chat.messages.length > lastSeenMsg[chat.id]
-              ? `<span class="unread-count">${
-                  chat.messages.length - lastSeenMsg[chat.id]
-                }</span>`
-              : ""
-          }
-        </div>
-        <span class="chat-time">${timestamp ? getTimeAgo(timestamp) : ""}</span>
-      </div>
-      <span class="chat-depart">
-        ${chat.hierarchy.slice(-3).join(" > ")}
-      </span>
-      <span class="chat-preview">
+  ${avatar}
+  <div class="chat-detail">
+    <div class="chat-header">
+      <div class="chat-title-container">
+        <span class="chat-title">${chat.name}</span>
         ${
-          chat.messages.length > 0
-            ? chat.messages[chat.messages.length - 1].content
+          chat.messages.length > lastSeenMsg[chat.id]
+            ? `<span class="unread-count">${
+                chat.messages.length - lastSeenMsg[chat.id]
+              }</span>`
             : ""
         }
-      </span>
+      </div>
+      <div class="chat-time-options">
+        <span class="chat-time">${timestamp ? getTimeAgo(timestamp) : ""}</span>
+        <button class="chat-options-button" data-id="${chat.id}">⋮</button>
+      </div>
     </div>
-  `;
+    <span class="chat-depart">
+      ${chat.hierarchy.slice(-3).join(" > ")}
+    </span>
+    <span class="chat-preview">
+      ${
+        chat.messages.length > 0
+          ? chat.messages[chat.messages.length - 1].content
+          : ""
+      }
+    </span>
+    <div class="chat-options-popup hidden" id="chat-options-${chat.id}">
+      <ul>
+        <li>채팅방 설정</li>
+        <li>채팅방 나가기</li>
+      </ul>
+    </div>
+  </div>
+`;
 
   if (chat.id !== currentChatId) {
     chatElement.addEventListener("click", () => changeChat(chat.id));
@@ -261,6 +270,21 @@ afterLoad(() => {
       sendMessage();
     }
   });
+  
+  document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("chat-options-button")) {
+    const chatId = e.target.getAttribute("data-id");
+    const popup = document.getElementById(`chat-options-${chatId}`);
+    if (popup) popup.classList.toggle("hidden");
+    e.stopPropagation();
+  } else {
+    // 클릭 시 메뉴 숨기기
+    document.querySelectorAll(".chat-options-popup").forEach((el) => {
+      el.classList.add("hidden");
+    });
+  }
+});
+
 });
 
 function renderChatContent(chat) {
