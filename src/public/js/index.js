@@ -300,6 +300,7 @@ function renderChatContent(chat) {
       prevSender = msg.sender;
     }
   });
+  chatContent.scrollTop = chatContent.scrollHeight;
 }
 
 const replyPhrases = {
@@ -404,6 +405,8 @@ function sendMessage() {
 
   input.value = "";
   renderChatContent(chat);
+  document.querySelector(".chat-content").scrollTop =
+    document.querySelector(".chat-content").scrollHeight;
   lastSeenMsg[currentChatId] = chat.messages.length;
   renderChatList();
 
