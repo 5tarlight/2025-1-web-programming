@@ -171,10 +171,30 @@ function renderChatList() {
   });
 }
 
+function updateHeader(chat) {
+  const hierarchyContainer = document.querySelector(".class-hierarchy");
+  const userCountContainer = document.querySelector(".user-count");
+
+  if (hierarchyContainer && userCountContainer) {
+    hierarchyContainer.innerHTML = chat.hierarchy
+      .map((item, index) =>
+        index < chat.hierarchy.length - 1
+          ? `<span>${item}</span><span>&gt;</span>`
+          : `<span>${item}</span>`
+      )
+      .join("");
+    userCountContainer.textContent = `${chat.members.length}명 참여 중`;
+  }
+}
+
 function changeChat(chatId) {
   currentChatId = chatId;
-  markRead(chatId);
-  renderChatList();
+  const chat = chats.find((chat) => chat.id === chatId);
+  if (chat) {
+    markRead(chatId);
+    updateHeader(chat);
+    renderChatList();
+  }
 }
 
 function markRead(chatId) {
@@ -205,5 +225,6 @@ function getTimeAgo(timestamp) {
 
 afterLoad(() => {
   markRead(currentChatId);
+  updateHeader(chats.find((chat) => chat.id === currentChatId));
   renderChatList();
 });
