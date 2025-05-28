@@ -7,21 +7,21 @@ const chats = [
     name: "AI응용학과",
     type: "department",
     hierarchy: ["창의융합대학", "AI응용학과"],
-    members: ["user1", "user2", "user3"],
+    members: ["김민수", "이서연", "박지훈", "최예은", "정우진"],
     messages: [
       {
-        sender: "user1",
+        sender: "김민수",
         content: "안녕하세요!",
         timestamp: "2025-05-24T18:12:00+09:00",
       },
       {
-        sender: "user2",
+        sender: "이서연",
         content: "안녕하세요! 반갑습니다.",
         timestamp: "2025-05-24T18:45:00+09:00",
       },
       {
-        sender: "user3",
-        content: "안녕하세요! 모두 잘 지내시나요?",
+        sender: "김민수",
+        content: "모두 잘 지내시나요?",
         timestamp: "2025-05-25T19:30:00+09:00",
       },
     ],
@@ -31,17 +31,22 @@ const chats = [
     name: "웹 프로그래밍",
     type: "class",
     hierarchy: ["창의융합대학", "AI응용학과", "웹 프로그래밍"],
-    members: ["user1", "user2"],
+    members: ["김민수", "이서연", "정유나"],
     messages: [
       {
-        sender: "user1",
+        sender: "정유나",
         content: "웹 프로그래밍 수업 어떻게 생각하세요?",
         timestamp: "2025-05-25T23:20:00+09:00",
       },
       {
-        sender: "user2",
+        sender: "이서연",
         content: "재밌어요! 실습이 많아서 좋아요.",
         timestamp: "2025-05-25T23:55:00+09:00",
+      },
+      {
+        sender: "김민수",
+        content: "저도 실습이 많아서 만족하고 있어요.",
+        timestamp: "2025-05-26T00:10:00+09:00",
       },
     ],
   },
@@ -50,27 +55,32 @@ const chats = [
     name: "인공지능 수학",
     type: "class",
     hierarchy: ["창의융합대학", "AI응용학과", "인공지능 수학"],
-    members: ["user1", "user2", "user3", "user4"],
+    members: ["김민수", "이서연", "박지훈", "최예은", "정우진", "정유나"],
     messages: [
       {
-        sender: "user1",
+        sender: "박지훈",
         content: "인공지능 수학 과제 언제까지 제출이죠?",
         timestamp: "2025-05-26T17:15:00+09:00",
       },
       {
-        sender: "user2",
+        sender: "정우진",
         content: "다음 주 월요일까지요.",
         timestamp: "2025-05-26T17:45:00+09:00",
       },
       {
-        sender: "user3",
+        sender: "최예은",
         content: "저는 아직 시작도 못했어요.",
         timestamp: "2025-05-27T18:00:00+09:00",
       },
       {
-        sender: "user4",
+        sender: "정유나",
         content: "같이 스터디 할까요?",
         timestamp: "2025-05-27T18:30:00+09:00",
+      },
+      {
+        sender: "최예은",
+        content: "좋아요! 언제 모일까요?",
+        timestamp: "2025-05-27T18:45:00+09:00",
       },
     ],
   },
@@ -80,25 +90,30 @@ const chats = [
     type: "team",
     hierarchy: ["창의융합대학", "AI응용학과", "웹 프로그래밍", "프론트엔드 팀"],
     avatar: "https://avatars.githubusercontent.com/u/12345678?v=4",
-    members: ["user1", "user2", "user3", "user4"],
+    members: ["김민수", "이서연", "박지훈", "최예은", "정우진"],
     messages: [
       {
-        sender: "user1",
+        sender: "이서연",
         content: "프론트엔드 프로젝트 진행 상황은 어때요?",
         timestamp: "2025-05-27T20:10:00+09:00",
       },
       {
-        sender: "user2",
+        sender: "이서연",
+        content: "디자인 시스템은 제가 맞춰볼게요.",
+        timestamp: "2025-05-27T20:11:00+09:00",
+      },
+      {
+        sender: "박지훈",
         content: "저는 거의 다 끝났어요.",
         timestamp: "2025-05-27T20:40:00+09:00",
       },
       {
-        sender: "user3",
+        sender: "정우진",
         content: "저도 거의 완료했어요.",
         timestamp: "2025-05-27T21:05:00+09:00",
       },
       {
-        sender: "user4",
+        sender: "최예은",
         content: "저는 아직 시작도 못했어요.",
         timestamp: "2025-05-28T22:20:00+09:00",
       },
@@ -194,6 +209,7 @@ function changeChat(chatId) {
     markRead(chatId);
     updateHeader(chat);
     renderChatList();
+    renderChatContent(chat);
   }
 }
 
@@ -225,6 +241,53 @@ function getTimeAgo(timestamp) {
 
 afterLoad(() => {
   markRead(currentChatId);
-  updateHeader(chats.find((chat) => chat.id === currentChatId));
+  const chat = chats.find((chat) => chat.id === currentChatId);
+  updateHeader(chat);
   renderChatList();
+  renderChatContent(chat);
 });
+
+function renderChatContent(chat) {
+  const chatContent = document.querySelector(".chat-content");
+  chatContent.innerHTML = "";
+
+  let prevSender = null;
+  let group = null;
+
+  chat.messages.forEach((msg, i) => {
+    if (msg.sender === "me") {
+      const sentEl = document.createElement("div");
+      sentEl.className = "message sent";
+      sentEl.innerHTML = `<div class="message-bubble">${msg.content}</div>`;
+      chatContent.appendChild(sentEl);
+      prevSender = null;
+      group = null;
+    } else {
+      if (msg.sender !== prevSender) {
+        group = document.createElement("div");
+        group.className = "message-group received";
+        group.innerHTML = `
+          <div class="message-meta">
+            <div class="profile-image">${msg.sender.charAt(0)}</div>
+            <div class="sender-info">
+              <div class="sender-name">${msg.sender}</div>
+              <div class="send-time">${new Date(
+                msg.timestamp
+              ).toLocaleTimeString("ko-KR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}</div>
+            </div>
+          </div>
+        `;
+        chatContent.appendChild(group);
+      }
+      const bubble = document.createElement("div");
+      bubble.className = "message-bubble";
+      bubble.textContent = msg.content;
+      group.appendChild(bubble);
+      prevSender = msg.sender;
+    }
+  });
+}
