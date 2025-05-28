@@ -302,6 +302,62 @@ function renderChatContent(chat) {
   });
 }
 
+const replyPhrases = {
+  start: [
+    "아 진짜요?",
+    "오, 그런 일이?",
+    "헐 대박…",
+    "ㅋㅋ 맞아요 맞아요.",
+    "음 그건 말이죠…",
+    "아 저도요!",
+    "그랬군요!",
+    "오호, 흥미롭네요.",
+    "이런 경우는 처음 봐요.",
+    "와, 신기하네요.",
+  ],
+  middle: [
+    "저도 비슷한 경험 있어요.",
+    "그건 좀 생각해볼 문제 같아요.",
+    "저는 그렇게 생각 안 했는데, 흥미롭네요.",
+    "저도 궁금했는데요.",
+    "이런 경우가 꽤 있죠.",
+    "저도 공감해요.",
+    "그런 일 자주 생기죠.",
+    "어쩌면 예상된 결과일 수도 있어요.",
+    "다들 그렇게 생각하더라고요.",
+    "경험이 많은 사람이면 다르게 볼 수도 있어요.",
+  ],
+  end: [
+    "알려줘서 고마워요!",
+    "함께 고민해봐요 :)",
+    "다음에 꼭 같이 해봐요!",
+    "재밌는 이야기네요.",
+    "좋은 정보 감사합니다!",
+    "그럴 수도 있겠네요!",
+    "앞으로도 기대되네요.",
+    "더 알아보고 이야기해요.",
+    "저도 좀 더 생각해볼게요.",
+    "언제 한 번 자세히 얘기해요!",
+  ],
+};
+
+function getRandomReplySet() {
+  const count = Math.floor(Math.random() * 3) + 1; // 1 to 3 replies
+  const replies = [];
+  for (let i = 0; i < count; i++) {
+    const start =
+      replyPhrases.start[Math.floor(Math.random() * replyPhrases.start.length)];
+    const middle =
+      replyPhrases.middle[
+        Math.floor(Math.random() * replyPhrases.middle.length)
+      ];
+    const end =
+      replyPhrases.end[Math.floor(Math.random() * replyPhrases.end.length)];
+    replies.push(`${start} ${middle} ${end}`);
+  }
+  return replies;
+}
+
 function sendMessage() {
   const input = document.querySelector(".chat-input");
   const content = input.value.trim();
@@ -320,4 +376,26 @@ function sendMessage() {
   renderChatContent(chat);
   lastSeenMsg[currentChatId] = chat.messages.length;
   renderChatList();
+
+  if (window.replyTimeout) clearTimeout(window.replyTimeout);
+  window.replyTimeout = setTimeout(() => {
+    const replyMessages = getRandomReplySet();
+    replyMessages.forEach((reply, index) => {
+      const delay = 1000 * (index + 1) + Math.floor(Math.random() * 1000);
+      setTimeout(() => {
+        chat.messages.push({
+          sender: chat.members.find((m) => m !== "me"),
+          content: reply,
+          timestamp: new Date().toISOString(),
+        });
+
+        if (chat.id === currentChatId) {
+          lastSeenMsg[currentChatId] = chat.messages.length;
+        }
+
+        renderChatContent(chat);
+        renderChatList();
+      }, delay);
+    });
+  }, 2000);
 }
