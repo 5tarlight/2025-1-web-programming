@@ -314,6 +314,16 @@ const replyPhrases = {
     "오호, 흥미롭네요.",
     "이런 경우는 처음 봐요.",
     "와, 신기하네요.",
+    "정말요?",
+    "어머나!",
+    "헉, 그럴수가?",
+    "그게 정말 사실이에요?",
+    "오오~ 신기하네요.",
+    "진심이에요?",
+    "어떻게 그런 일이!",
+    "에이 설마요~",
+    "아 그렇구나!",
+    "그랬었구나!",
   ],
   middle: [
     "저도 비슷한 경험 있어요.",
@@ -326,6 +336,16 @@ const replyPhrases = {
     "어쩌면 예상된 결과일 수도 있어요.",
     "다들 그렇게 생각하더라고요.",
     "경험이 많은 사람이면 다르게 볼 수도 있어요.",
+    "그렇게 볼 수도 있겠네요.",
+    "여러가지 의견이 있겠죠.",
+    "그런 상황 많이들 겪죠.",
+    "저도 비슷하게 생각해요.",
+    "예전에도 그런 경우가 있었어요.",
+    "그건 확실히 중요한 포인트예요.",
+    "그렇게 말하니 이해되네요.",
+    "공감 가는 얘기네요.",
+    "맞아요, 고민되죠.",
+    "같은 생각했어요.",
   ],
   end: [
     "알려줘서 고마워요!",
@@ -338,6 +358,16 @@ const replyPhrases = {
     "더 알아보고 이야기해요.",
     "저도 좀 더 생각해볼게요.",
     "언제 한 번 자세히 얘기해요!",
+    "앞으로도 잘 부탁드려요!",
+    "오늘도 즐거운 하루 되세요!",
+    "더 얘기 나눠봐요.",
+    "그럼 이만!",
+    "좋은 하루 보내세요!",
+    "다음에 또 이야기해요!",
+    "계속 응원할게요.",
+    "곧 다시 이야기해요!",
+    "참고할게요~",
+    "또 공유해 주세요!",
   ],
 };
 
@@ -380,11 +410,12 @@ function sendMessage() {
   if (window.replyTimeout) clearTimeout(window.replyTimeout);
   window.replyTimeout = setTimeout(() => {
     const replyMessages = getRandomReplySet();
+    const sender = getRandomOtherMember(chat.members);
     replyMessages.forEach((reply, index) => {
       const delay = 1000 * (index + 1) + Math.floor(Math.random() * 1000);
       setTimeout(() => {
         chat.messages.push({
-          sender: chat.members.find((m) => m !== "me"),
+          sender,
           content: reply,
           timestamp: new Date().toISOString(),
         });
@@ -398,4 +429,9 @@ function sendMessage() {
       }, delay);
     });
   }, 2000);
+}
+
+function getRandomOtherMember(members) {
+  const others = members.filter((m) => m !== "me");
+  return others[Math.floor(Math.random() * others.length)];
 }
