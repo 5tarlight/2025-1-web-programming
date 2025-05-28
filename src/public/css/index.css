@@ -296,3 +296,31 @@
 .send-button:disabled:hover {
   background-color: var(--color-blue-300);
 }
+
+.message {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.message.received {
+  justify-content: flex-start;
+  align-self: flex-start;
+}
+
+.message.sent {
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+
+.message-bubble {
+  padding: 0.6rem 1rem;
+  border-radius: 1rem;
+  background-color: #f1f1f1;
+  font-size: 0.95rem;
+  color: #333;
+  word-break: break-word;
+}
+
+.message.sent .message-bubble {
+  background-color: #d2eaff;
+}
