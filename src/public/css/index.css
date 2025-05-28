@@ -188,6 +188,11 @@
   font-weight: bold;
 }
 
+.private-avatar {
+  border: 2px solid var(--color-blue-600);
+}
+
+
 .body-header {
   width: 100%;
   display: flex;
@@ -217,18 +222,6 @@
   color: var(--color-blue-600);
   font-weight: bold;
   font-size: 1rem;
-}
-
-.public-chat {
-  border: 1px solid #ddd;
-  border-radius: 1rem;
-  background-color: white;
-}
-
-.private-chat {
-  border: 2px solid var(--color-blue-600);
-  border-radius: 1rem;
-  background-color: var(--color-blue-50);
 }
 
 .user-count {
