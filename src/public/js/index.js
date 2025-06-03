@@ -129,15 +129,19 @@ function renderChatRoomPreview(chat) {
   const chatElement = document.createElement("div");
   chatElement.className =
     "chat" + (chat.id === currentChatId ? " chat-active" : "");
-  
-    const avatarClass = chat.type === "team"
-    ? "chat-text-avatar private-avatar"
-    : "chat-text-avatar";
 
-    const avatar = chat.avatar
-    ? `<img src="${chat.avatar}" alt="${chat.name}" class="chat-avatar">`
-    : `<div class="${avatarClass}">${chat.name.charAt(0)}</div>`;
+  const avatarClass =
+    chat.type === "team"
+      ? "chat-team-avatar"
+      : chat.type === "department"
+      ? "chat-department-avatar"
+      : "chat-class-avatar";
 
+  const avatar = chat.avatar
+    ? `<img src="${chat.avatar}" alt="${chat.name}" class="chat-text-avatar ${avatarClass}">`
+    : `<div class="chat-text-avatar ${avatarClass}">${chat.name.charAt(
+        0
+      )}</div>`;
 
   if (!lastSeenMsg[chat.id]) {
     lastSeenMsg[chat.id] = 0;

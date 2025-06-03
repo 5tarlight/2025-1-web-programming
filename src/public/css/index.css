@@ -115,7 +115,7 @@
   background-color: var(--color-slate-100);
 }
 
-.chat .chat-avatar {
+.chat .chat-public-avatar {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -128,6 +128,30 @@
   flex-direction: column;
   width: 100%;
   min-width: 0;
+}
+
+.chat-text-avatar.chat-class-avatar {
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+.chat:hover .chat-text-avatar.chat-class-avatar {
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.9);
+}
+
+.chat-text-avatar.chat-department-avatar {
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+.chat:hover .chat-text-avatar.chat-department-avatar {
+  box-shadow: 0 0 12px rgba(40, 167, 69, 0.9);
+}
+
+.chat-text-avatar.chat-team-avatar {
+  box-shadow: 0 0 6px rgba(255, 193, 7, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+.chat:hover .chat-text-avatar.chat-team-avatar {
+  box-shadow: 0 0 12px rgba(255, 193, 7, 0.9);
 }
 
 .chat-header {
@@ -191,7 +215,6 @@
 .private-avatar {
   border: 2px solid var(--color-blue-600);
 }
-
 
 .body-header {
   width: 100%;
