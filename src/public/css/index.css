@@ -409,3 +409,38 @@
   margin-left: 2.25rem;
   margin-top: 0.2rem;
 }
+
+.side-timetable {
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  background-color: var(--color-slate-50);
+  font-size: 0.9rem;
+  color: var(--color-neutral-700);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timetable-item {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.timetable-item:hover {
+  background-color: var(--color-slate-100);
+  cursor: pointer;
+}
+
+.timetable-item span:first-child {
+  font-weight: bold;
+  color: var(--color-blue-600);
+}
+
+.timetable-item span:last-child {
+  color: var(--color-neutral-800);
+}
