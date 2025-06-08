@@ -546,9 +546,14 @@ function showContextMenu(x, y, msg, chat) {
   const contextMenu = document.querySelector(".context-menu");
   contextMenu.innerHTML = "";
   const actions = [
-    { label: "공지 등록", action: () => alert("공지 등록 기능 준비 중") }, // TODO
+    {
+      label: "공지 등록",
+      icon: "📌",
+      action: () => alert("공지 등록 기능 준비 중"),
+    },
     {
       label: "삭제",
+      icon: "🗑️",
       action: () => {
         const index = chat.messages.indexOf(msg);
         if (index > -1) {
@@ -560,16 +565,17 @@ function showContextMenu(x, y, msg, chat) {
     },
     {
       label: "복사",
+      icon: "📋",
       action: () => {
         navigator.clipboard.writeText(msg.content);
       },
     },
   ];
 
-  actions.forEach(({ label, action }) => {
+  actions.forEach(({ label, icon, action }) => {
     const item = document.createElement("div");
     item.className = "context-menu-item";
-    item.textContent = label;
+    item.innerHTML = `<span class="menu-icon">${icon}</span>${label}`;
     item.addEventListener("click", () => {
       contextMenu.classList.add("hidden");
       action();
