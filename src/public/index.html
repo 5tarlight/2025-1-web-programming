@@ -39,7 +39,9 @@
             <input type="text" placeholder="채팅방 검색…" />
           </label>
         </div>
-        <div class="chat-list"></div>
+        <div class="chat-list">
+          <button class="chat-add-button">+</button>
+        </div>
         <div class="side-timetable">
           <div class="timetable-item">
             <span>10:00~12:00</span>
@@ -108,6 +110,16 @@
               <polygon points="22 2 15 22 11 13 2 9 22 2" />
             </svg>
           </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-overlay hidden">
+      <div class="modal">
+        <h2>새 채팅방 만들기</h2>
+        <input type="text" id="new-chat-name" placeholder="채팅방 이름 입력" />
+        <div class="modal-actions">
+          <button id="create-chat-button">생성</button>
+          <button id="cancel-chat-button">취소</button>
         </div>
       </div>
     </div>

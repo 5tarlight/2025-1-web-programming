@@ -188,7 +188,9 @@ function renderChatRoomPreview(chat) {
 
 function renderChatList() {
   const chatListContainer = document.querySelector(".chat-list");
+  const addButton = document.querySelector(".chat-add-button");
   chatListContainer.innerHTML = "";
+  if (addButton) chatListContainer.appendChild(addButton);
 
   chats.forEach((chat) => {
     const chatElement = renderChatRoomPreview(chat);
@@ -264,6 +266,51 @@ afterLoad(() => {
       e.preventDefault();
       sendMessage();
     }
+  });
+
+  const modalOverlay = document.querySelector(".modal-overlay");
+  const addButton = document.querySelector(".chat-add-button");
+  const cancelButton = document.getElementById("cancel-chat-button");
+  const createButton = document.getElementById("create-chat-button");
+  const newChatNameInput = document.getElementById("new-chat-name");
+
+  addButton.addEventListener("click", () => {
+    newChatNameInput.value = "";
+    modalOverlay.classList.remove("hidden");
+    newChatNameInput.focus();
+  });
+
+  cancelButton.addEventListener("click", () => {
+    modalOverlay.classList.add("hidden");
+  });
+
+  createButton.addEventListener("click", () => {
+    const name = newChatNameInput.value.trim();
+    if (!name) return;
+
+    const newChat = {
+      id: chats.length + 1,
+      name,
+      type: "team",
+      hierarchy: ["임시 그룹", name],
+      members: ["me", "김민수", "이서연", "박지훈", "최예은", "정우진"],
+      messages: [
+        {
+          sender: "me",
+          content: "채팅방에 입장했습니다.",
+          timestamp: new Date().toISOString(),
+        },
+      ],
+    };
+
+    chats.unshift(newChat);
+    currentChatId = newChat.id;
+    markRead(currentChatId);
+    simulateReplies(newChat);
+    modalOverlay.classList.add("hidden");
+    renderChatList();
+    updateHeader(newChat);
+    renderChatContent(newChat);
   });
 });
 
@@ -447,4 +494,29 @@ function sendMessage() {
 function getRandomOtherMember(members) {
   const others = members.filter((m) => m !== "me");
   return others[Math.floor(Math.random() * others.length)];
+}
+
+function simulateReplies(chat) {
+  if (window.replyTimeout) clearTimeout(window.replyTimeout);
+  window.replyTimeout = setTimeout(() => {
+    const replyMessages = getRandomReplySet();
+    const sender = getRandomOtherMember(chat.members);
+    replyMessages.forEach((reply, index) => {
+      const delay = 1000 * (index + 1) + Math.floor(Math.random() * 1000);
+      setTimeout(() => {
+        chat.messages.push({
+          sender,
+          content: reply,
+          timestamp: new Date().toISOString(),
+        });
+
+        if (chat.id === currentChatId) {
+          lastSeenMsg[currentChatId] = chat.messages.length;
+          renderChatContent(chat);
+        }
+
+        renderChatList();
+      }, delay);
+    });
+  }, 2000);
 }
