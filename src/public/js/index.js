@@ -536,11 +536,14 @@ function simulateReplies(chat) {
   }, 2000);
 }
 
-const contextMenu = document.createElement("div");
-contextMenu.className = "context-menu hidden";
-document.body.appendChild(contextMenu);
+afterLoad(() => {
+  const contextMenu = document.createElement("div");
+  contextMenu.className = "context-menu hidden";
+  document.body.appendChild(contextMenu);
+});
 
 function showContextMenu(x, y, msg, chat) {
+  const contextMenu = document.querySelector(".context-menu");
   contextMenu.innerHTML = "";
   const actions = [
     { label: "공지 등록", action: () => alert("공지 등록 기능 준비 중") }, // TODO
@@ -580,5 +583,6 @@ function showContextMenu(x, y, msg, chat) {
 }
 
 document.addEventListener("click", () => {
+  const contextMenu = document.querySelector(".context-menu");
   contextMenu.classList.add("hidden");
 });
