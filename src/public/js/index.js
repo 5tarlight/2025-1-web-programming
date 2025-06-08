@@ -364,6 +364,10 @@ function renderChatContent(chat) {
       const bubble = document.createElement("div");
       bubble.className = "message-bubble";
       bubble.textContent = msg.content;
+      bubble.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        showContextMenu(e.pageX, e.pageY, msg, chat);
+      });
       group.appendChild(bubble);
       prevSender = msg.sender;
     }
@@ -531,3 +535,50 @@ function simulateReplies(chat) {
     });
   }, 2000);
 }
+
+const contextMenu = document.createElement("div");
+contextMenu.className = "context-menu hidden";
+document.body.appendChild(contextMenu);
+
+function showContextMenu(x, y, msg, chat) {
+  contextMenu.innerHTML = "";
+  const actions = [
+    { label: "공지 등록", action: () => alert("공지 등록 기능 준비 중") }, // TODO
+    {
+      label: "삭제",
+      action: () => {
+        const index = chat.messages.indexOf(msg);
+        if (index > -1) {
+          chat.messages.splice(index, 1);
+          renderChatContent(chat);
+          renderChatList();
+        }
+      },
+    },
+    {
+      label: "복사",
+      action: () => {
+        navigator.clipboard.writeText(msg.content);
+      },
+    },
+  ];
+
+  actions.forEach(({ label, action }) => {
+    const item = document.createElement("div");
+    item.className = "context-menu-item";
+    item.textContent = label;
+    item.addEventListener("click", () => {
+      contextMenu.classList.add("hidden");
+      action();
+    });
+    contextMenu.appendChild(item);
+  });
+
+  contextMenu.style.top = y + "px";
+  contextMenu.style.left = x + "px";
+  contextMenu.classList.remove("hidden");
+}
+
+document.addEventListener("click", () => {
+  contextMenu.classList.add("hidden");
+});
