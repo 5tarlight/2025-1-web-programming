@@ -312,6 +312,7 @@ afterLoad(() => {
           timestamp: new Date().toISOString(),
         },
       ],
+      pinnedMessage: null,
     };
 
     chats.unshift(newChat);
@@ -329,6 +330,39 @@ function renderChatContent(chat) {
   const chatContent = document.querySelector(".chat-content");
   chatContent.innerHTML = "";
 
+  // Show pinned message if present
+  if (chat.pinnedMessage) {
+    const pinned = document.createElement("div");
+    pinned.className = "pinned-message";
+    pinned.innerHTML = `
+      <div class="message-meta">
+        <div class="profile-image">${chat.pinnedMessage.sender.charAt(0)}</div>
+        <div class="sender-info">
+          <div class="sender-name">${chat.pinnedMessage.sender} (공지)</div>
+          <div class="send-time">${new Date(
+            chat.pinnedMessage.timestamp
+          ).toLocaleTimeString("ko-KR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          })}</div>
+        </div>
+      </div>
+      <div class="message-bubble">${chat.pinnedMessage.content}</div>
+    `;
+
+    const unpinBtn = document.createElement("button");
+    unpinBtn.className = "unpin-button";
+    unpinBtn.textContent = "공지 해제";
+    unpinBtn.addEventListener("click", () => {
+      chat.pinnedMessage = null;
+      renderChatContent(chat);
+      renderChatList();
+    });
+    pinned.appendChild(unpinBtn);
+    chatContent.appendChild(pinned);
+  }
+
   let prevSender = null;
   let group = null;
 
@@ -336,7 +370,14 @@ function renderChatContent(chat) {
     if (msg.sender === "me") {
       const sentEl = document.createElement("div");
       sentEl.className = "message sent";
-      sentEl.innerHTML = `<div class="message-bubble">${msg.content}</div>`;
+      const sentBubble = document.createElement("div");
+      sentBubble.className = "message-bubble";
+      sentBubble.textContent = msg.content;
+      sentBubble.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        showContextMenu(e.pageX, e.pageY, msg, chat);
+      });
+      sentEl.appendChild(sentBubble);
       chatContent.appendChild(sentEl);
       prevSender = null;
       group = null;
@@ -549,7 +590,11 @@ function showContextMenu(x, y, msg, chat) {
     {
       label: "공지 등록",
       icon: "📌",
-      action: () => alert("공지 등록 기능 준비 중"),
+      action: () => {
+        chat.pinnedMessage = msg;
+        renderChatContent(chat);
+        renderChatList();
+      },
     },
     {
       label: "삭제",
