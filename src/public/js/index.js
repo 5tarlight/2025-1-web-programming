@@ -192,10 +192,21 @@ function renderChatList() {
   chatListContainer.innerHTML = "";
   if (addButton) chatListContainer.appendChild(addButton);
 
-  chats.forEach((chat) => {
-    const chatElement = renderChatRoomPreview(chat);
-    chatListContainer.appendChild(chatElement);
-  });
+  chats
+    .slice()
+    .sort((a, b) => {
+      const timeA = new Date(
+        a.messages[a.messages.length - 1]?.timestamp || 0
+      ).getTime();
+      const timeB = new Date(
+        b.messages[b.messages.length - 1]?.timestamp || 0
+      ).getTime();
+      return timeB - timeA;
+    })
+    .forEach((chat) => {
+      const chatElement = renderChatRoomPreview(chat);
+      chatListContainer.appendChild(chatElement);
+    });
 }
 
 function updateHeader(chat) {
