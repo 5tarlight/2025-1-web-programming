@@ -190,10 +190,9 @@ function renderChatList() {
   const chatListContainer = document.querySelector(".chat-list");
   const addButton = document.querySelector(".chat-add-button");
   chatListContainer.innerHTML = "";
-  if (addButton) chatListContainer.appendChild(addButton);
+  chatListContainer.appendChild(addButton);
 
   chats
-    .slice()
     .sort((a, b) => {
       const timeA = new Date(
         a.messages[a.messages.length - 1]?.timestamp || 0
