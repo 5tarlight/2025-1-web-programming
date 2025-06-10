@@ -195,11 +195,12 @@ function renderChatList() {
   chats
     .sort((a, b) => {
       const timeA = new Date(
-        a.messages[a.messages.length - 1]?.timestamp || 0
+        a.messages[a.messages.length - 1].timestamp
       ).getTime();
       const timeB = new Date(
-        b.messages[b.messages.length - 1]?.timestamp || 0
+        b.messages[b.messages.length - 1].timestamp
       ).getTime();
+
       return timeB - timeA;
     })
     .forEach((chat) => {
