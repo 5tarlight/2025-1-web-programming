@@ -318,7 +318,6 @@ afterLoad(() => {
     chats.unshift(newChat);
     currentChatId = newChat.id;
     markRead(currentChatId);
-    simulateReplies(newChat);
     modalOverlay.classList.add("hidden");
     renderChatList();
     updateHeader(newChat);
