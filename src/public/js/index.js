@@ -523,28 +523,7 @@ function sendMessage() {
   lastSeenMsg[currentChatId] = chat.messages.length;
   renderChatList();
 
-  if (window.replyTimeout) clearTimeout(window.replyTimeout);
-  window.replyTimeout = setTimeout(() => {
-    const replyMessages = getRandomReplySet();
-    const sender = getRandomOtherMember(chat.members);
-    replyMessages.forEach((reply, index) => {
-      const delay = 1000 * (index + 1) + Math.floor(Math.random() * 1000);
-      setTimeout(() => {
-        chat.messages.push({
-          sender,
-          content: reply,
-          timestamp: new Date().toISOString(),
-        });
-
-        if (chat.id === currentChatId) {
-          lastSeenMsg[currentChatId] = chat.messages.length;
-          renderChatContent(chat);
-        }
-
-        renderChatList();
-      }, delay);
-    });
-  }, 2000);
+  simulateReplies(chat);
 }
 
 function getRandomOtherMember(members) {
