@@ -183,7 +183,40 @@ function renderChatRoomPreview(chat) {
     chatElement.addEventListener("click", () => changeChat(chat.id));
   }
 
+  chatElement.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    showChatContextMenu(e.pageX, e.pageY, chat);
+  });
+
   return chatElement;
+}
+
+function showChatContextMenu(x, y, chat) {
+  const contextMenu = document.querySelector(".context-menu");
+  contextMenu.innerHTML = "";
+
+  const leaveItem = document.createElement("div");
+  leaveItem.className = "context-menu-item";
+  leaveItem.innerHTML = `<span class="menu-icon">🚪</span> 채팅방 나가기`;
+
+  leaveItem.addEventListener("click", () => {
+    const index = chats.indexOf(chat);
+    if (index > -1) {
+      chats.splice(index, 1);
+      if (currentChatId === chat.id) {
+        currentChatId = chats[0]?.id || null;
+      }
+      renderChatList();
+      updateHeader(chats.find((c) => c.id === currentChatId));
+      renderChatContent(chats.find((c) => c.id === currentChatId));
+    }
+    contextMenu.classList.add("hidden");
+  });
+
+  contextMenu.appendChild(leaveItem);
+  contextMenu.style.top = y + "px";
+  contextMenu.style.left = x + "px";
+  contextMenu.classList.remove("hidden");
 }
 
 function renderChatList() {
