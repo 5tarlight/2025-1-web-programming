@@ -200,6 +200,31 @@ function showChatContextMenu(x, y, chat) {
   leaveItem.innerHTML = `<span class="menu-icon">🚪</span> 채팅방 나가기`;
 
   leaveItem.addEventListener("click", () => {
+    showLeaveConfirmation(chat);
+    contextMenu.classList.add("hidden");
+  });
+
+  contextMenu.appendChild(leaveItem);
+  contextMenu.style.top = y + "px";
+  contextMenu.style.left = x + "px";
+  contextMenu.classList.remove("hidden");
+}
+
+function showLeaveConfirmation(chat) {
+  const modal = document.createElement("div");
+  modal.className = "confirm-modal";
+  modal.innerHTML = `
+    <div class="confirm-content">
+      <p class="confirm-text">해당 채팅방에서 나가시겠습니까?<br>대화 내용이 모두 삭제되며 복구가 불가능합니다.</p>
+      <div class="confirm-buttons">
+        <button class="confirm-yes">예</button>
+        <button class="confirm-no">아니오</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  modal.querySelector(".confirm-yes").addEventListener("click", () => {
     const index = chats.indexOf(chat);
     if (index > -1) {
       chats.splice(index, 1);
@@ -210,13 +235,18 @@ function showChatContextMenu(x, y, chat) {
       updateHeader(chats.find((c) => c.id === currentChatId));
       renderChatContent(chats.find((c) => c.id === currentChatId));
     }
-    contextMenu.classList.add("hidden");
+    document.body.removeChild(modal);
   });
 
-  contextMenu.appendChild(leaveItem);
-  contextMenu.style.top = y + "px";
-  contextMenu.style.left = x + "px";
-  contextMenu.classList.remove("hidden");
+  modal.querySelector(".confirm-no").addEventListener("click", () => {
+    document.body.removeChild(modal);
+  });
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      document.body.removeChild(modal);
+    }
+  });
 }
 
 function renderChatList() {

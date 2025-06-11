@@ -700,3 +700,66 @@
 .menu-icon {
   font-size: 16px;
 }
+/* 채팅방 나가기 경고 팝업 스타일 */
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.confirm-content {
+  background-color: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 80%;
+}
+
+.confirm-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.confirm-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-buttons .confirm-yes {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.confirm-buttons .confirm-yes:hover {
+  background-color: #d32f2f;
+}
+
+.confirm-buttons .confirm-no {
+  background-color: #ccc;
+  color: #333;
+}
+
+.confirm-buttons .confirm-no:hover {
+  background-color: #bbb;
+}
