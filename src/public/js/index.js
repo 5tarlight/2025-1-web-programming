@@ -249,13 +249,14 @@ function showLeaveConfirmation(chat) {
   });
 }
 
-function renderChatList() {
+function renderChatList(filter = "") {
   const chatListContainer = document.querySelector(".chat-list");
   const addButton = document.querySelector(".chat-add-button");
   chatListContainer.innerHTML = "";
   chatListContainer.appendChild(addButton);
 
   chats
+    .filter((chat) => chat.name.toLowerCase().includes(filter.toLowerCase()))
     .sort((a, b) => {
       const timeA = new Date(
         a.messages[a.messages.length - 1].timestamp
@@ -270,6 +271,16 @@ function renderChatList() {
       const chatElement = renderChatRoomPreview(chat);
       chatListContainer.appendChild(chatElement);
     });
+}
+
+function setupChatSearch() {
+  const searchInput = document.querySelector(".chat-search input");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", (e) => {
+    const keyword = e.target.value;
+    renderChatList(keyword);
+  });
 }
 
 function updateHeader(chat) {
@@ -331,6 +342,8 @@ afterLoad(() => {
   updateHeader(chat);
   renderChatList();
   renderChatContent(chat);
+
+  setupChatSearch();
 
   document.querySelector(".send-button").addEventListener("click", sendMessage);
   document.querySelector(".chat-input").addEventListener("keydown", (e) => {
