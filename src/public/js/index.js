@@ -255,7 +255,7 @@ function renderChatList(filter = "") {
   chatListContainer.innerHTML = "";
   chatListContainer.appendChild(addButton);
 
-  chats
+  const filteredChats = chats
     .filter((chat) => chat.name.toLowerCase().includes(filter.toLowerCase()))
     .sort((a, b) => {
       const timeA = new Date(
@@ -264,23 +264,41 @@ function renderChatList(filter = "") {
       const timeB = new Date(
         b.messages[b.messages.length - 1].timestamp
       ).getTime();
-
       return timeB - timeA;
-    })
-    .forEach((chat) => {
-      const chatElement = renderChatRoomPreview(chat);
-      chatListContainer.appendChild(chatElement);
     });
+
+  if (filteredChats.length === 0) {
+    const emptyMessage = document.createElement("div");
+    emptyMessage.className = "chat-empty-message";
+    emptyMessage.textContent = "검색 결과가 존재하지 않습니다.";
+    chatListContainer.appendChild(emptyMessage);
+    return;
+  }
+
+  filteredChats.forEach((chat) => {
+    const chatElement = renderChatRoomPreview(chat);
+    chatListContainer.appendChild(chatElement);
+  });
+}
+
+function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
 }
 
 function setupChatSearch() {
   const searchInput = document.querySelector(".chat-search input");
   if (!searchInput) return;
 
-  searchInput.addEventListener("input", (e) => {
+  const debouncedSearch = debounce((e) => {
     const keyword = e.target.value;
     renderChatList(keyword);
-  });
+  }, 300);
+
+  searchInput.addEventListener("input", debouncedSearch);
 }
 
 function updateHeader(chat) {
