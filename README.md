@@ -1,6 +1,8 @@
 # 이규동성
 2025년 1학기 웹 프로그래밍 A반 이규동성 팀 레포.
 
+[사이트 링크](https://5tarlight.github.io/2025-1-web-programming/src/public/index.html)
+
 ## 팀원
 
 |학번|이름|비고|
